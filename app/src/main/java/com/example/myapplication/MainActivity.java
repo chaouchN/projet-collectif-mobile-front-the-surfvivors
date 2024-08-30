@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container_view, new WelcomeFragment())
+                    .replace(R.id.main, new WelcomeFragment())
                     .commit(); } }
 }
 
