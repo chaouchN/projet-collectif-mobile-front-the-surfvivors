@@ -78,6 +78,20 @@ public class MainActivity2 extends AppCompatActivity {
         // Associer l'adaptateur à la ListView
         listView.setAdapter(arrayAdapter);
 
+        // Ajouter un OnItemClickListener pour gérer les clics sur les éléments de la liste
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            git 
+                // Obtenir l'objet Spot correspondant à la position cliquée
+                Spot clickedSpot = (Spot) parent.getItemAtPosition(position);
+
+                // Démarrer une nouvelle activité avec les informations du spot
+                Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
+                intent.putExtra("country", clickedSpot.country);
+                startActivity(intent);
+            }
+        });
+    }
     }
 
     class Spot {
@@ -92,4 +106,3 @@ public class MainActivity2 extends AppCompatActivity {
         }
 
     }
-}
