@@ -1,11 +1,14 @@
 package com.example.myapplication;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -69,22 +72,24 @@ public class MainActivity2 extends AppCompatActivity {
 
                 return convertView;
             }
+
         };
 
         // Associer l'adaptateur à la ListView
         listView.setAdapter(arrayAdapter);
-    }
-}
 
-class Spot {
-    String beach;
-    String country;
-    int difficulty_level;
-
-    public Spot(String beach, String country, int difficulty_level) {
-        this.beach = beach;
-        this.country = country;
-        this.difficulty_level = difficulty_level;
     }
 
+    class Spot {
+        String beach;
+        String country;
+        int difficulty_level;
+
+        public Spot(String beach, String country, int difficulty_level) {
+            this.beach = beach;
+            this.country = country;
+            this.difficulty_level = difficulty_level;
+        }
+
+    }
 }
