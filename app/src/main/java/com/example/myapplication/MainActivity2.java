@@ -81,7 +81,7 @@ public class MainActivity2 extends AppCompatActivity {
         // Ajouter un OnItemClickListener pour gérer les clics sur les éléments de la liste
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            git 
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Obtenir l'objet Spot correspondant à la position cliquée
                 Spot clickedSpot = (Spot) parent.getItemAtPosition(position);
 
