@@ -54,7 +54,8 @@ public class MainActivity2 extends AppCompatActivity {
 
         // Créer un ArrayAdapter pour la classe Spot
         arrayAdapter = new ArrayAdapter<Spot>(this, android.R.layout.simple_list_item_1, spots) {
-            @Override
+
+           @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 // Utiliser la vue recyclée si elle est disponible
                 if (convertView == null) {
@@ -82,6 +83,7 @@ public class MainActivity2 extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 // Obtenir l'objet Spot correspondant à la position cliquée
                 Spot clickedSpot = (Spot) parent.getItemAtPosition(position);
 
