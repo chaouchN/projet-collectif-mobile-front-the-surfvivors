@@ -89,7 +89,9 @@ public class MainActivity2 extends AppCompatActivity {
 
                 // Démarrer une nouvelle activité avec les informations du spot
                 Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
+                intent.putExtra("beach", clickedSpot.beach);
                 intent.putExtra("country", clickedSpot.country);
+                intent.putExtra("difficulty level", clickedSpot.difficulty_level);
                 startActivity(intent);
             }
         });
@@ -105,6 +107,18 @@ public class MainActivity2 extends AppCompatActivity {
             this.beach = beach;
             this.country = country;
             this.difficulty_level = difficulty_level;
+        }
+
+        public String getBeach() {
+            return beach;
+        }
+
+        public String getCountry() {
+            return country;
+        }
+
+        public int getDifficulty_level() {
+            return difficulty_level;
         }
 
     }

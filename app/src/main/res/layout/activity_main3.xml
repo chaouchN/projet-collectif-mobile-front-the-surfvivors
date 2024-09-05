@@ -10,12 +10,13 @@
     android:text = "Bonjour">
 
     <TextView
+        android:id="@+id/beachTextView"
         android:layout_width="348dp"
         android:layout_height="83dp"
         android:layout_margin="24dp"
         android:fontFamily="@font/baloo_da"
         android:gravity="center"
-        android:text="Welcome to the surfvivors"
+        android:text=""
         android:textColor="@android:color/black"
         android:textSize="40sp"
         android:textStyle="bold">
@@ -23,12 +24,13 @@
     </TextView>
 
     <TextView
+        android:id="@+id/countryTextView"
         android:layout_width="348dp"
         android:layout_height="83dp"
         android:layout_margin="24dp"
         android:fontFamily="@font/baloo_da"
         android:gravity="center"
-        android:text="Welcome to the surfvivors"
+        android:text=""
         android:textColor="@android:color/black"
         android:textSize="40sp"
         android:textStyle="bold">
@@ -36,12 +38,13 @@
     </TextView>
 
     <TextView
+        android:id="@+id/difficulty_levelTextView"
         android:layout_width="348dp"
         android:layout_height="83dp"
         android:layout_margin="24dp"
         android:fontFamily="@font/baloo_da"
         android:gravity="center"
-        android:text="Welcome to the surfvivors"
+        android:text=""
         android:textColor="@android:color/black"
         android:textSize="40sp"
         android:textStyle="bold">
