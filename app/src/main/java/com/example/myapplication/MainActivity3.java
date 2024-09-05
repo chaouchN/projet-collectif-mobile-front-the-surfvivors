@@ -15,34 +15,35 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity3 extends AppCompatActivity {
-    private TextView textview;
+    private TextView beachTextView;
+    private TextView countryTextView;
+    private TextView difficulty_levelTextView;
 
-    public void onCreate(Bundle savedInstanceState) {
-
-
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main3);
 
-        TextView beachTextView = (TextView)findViewById(R.id.beachTextView);
-        TextView countryTextView = (TextView)findViewById(R.id.countryTextView);
-        TextView difficulty_levelTextView = (TextView)findViewById(R.id.difficulty_levelTextView);
-
-        String Spot_beach = getIntent().getStringExtra("beach");
-        String Spot_country = getIntent().getStringExtra("country");
-        String Spot_difficulty = getIntent().getStringExtra("difficulty_level");
-
-
-        //beachTextView = Spot_beach;
-
-        //if(getIntent() != null && getIntent().hasExtra(spot.beach)) {
-            /*countryTextView.setText(getIntent().getStringExtra(Intent.spot.country));
-        };
-
+        beachTextView = findViewById(R.id.beachTextView);
+        countryTextView = findViewById(R.id.countryTextView);
+        difficulty_levelTextView = findViewById(R.id.difficulty_levelTextView);
 
         Intent intent = getIntent();
-        System.out.println(intent.getStringExtra(Spot));*/
+
+        String Spot_beach = intent.getStringExtra("beach");
+        String Spot_country = intent.getStringExtra("country");
+        String Spot_difficulty = intent.getStringExtra("difficulty_level");
+
+
+        beachTextView.setText(Spot_beach);
+        countryTextView.setText(Spot_country);
+        difficulty_levelTextView.setText(Spot_difficulty);
+        }
+
+
+
+        //System.out.println(intent.getStringExtra(Spot));*/
     }
 
-};
 
