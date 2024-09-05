@@ -1,124 +1,73 @@
 package com.example.myapplication;
 
-
-import android.content.Intent;
+import org.json.JSONObject;
+import org.json.JSONException;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import android.widget.Toast;
+import android.util.Log;
+import android.os.AsyncTask;
 
-
-
-    //private final String[] spots = new String[]{
-            //"Hawai",
-            //"Australia",
-            //"South Africa",
-            //"Peru",
-            //"Canary Islands",
-            //"Usa, Oregon",
-            //"Maldives",
-            //"New Zealand",
-            //"Usa, North Carolina",
-            //"Namibia"
-    //};
 
 
 public class MainActivity2 extends AppCompatActivity {
 
+    private String TAG = MainActivity2.class.getSimpleName();
     private ListView listView;
-    private ArrayAdapter<Spot> arrayAdapter;
+
+    ArrayList<HashMap<String, String>> addressList;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        // Initialiser la ListView
-        listView = findViewById(R.id.list_view_id);
+        addressList = new ArrayList<>();
+        listView = (ListView) findViewById(R.id.list_view_id);
+        new GetAddress().execute();
+    }
 
-        // Créer une liste de spots
-        List<Spot> spots = new ArrayList<>();
-        spots.add(new Spot("skeleton_bay", "Namibia", 5));
-        spots.add(new Spot("J-Bay", "South Africa", 4));
-        spots.add(new Spot("Pipeline", "Hawaii", 5));
-        // Ajouter d'autres objets Spot si nécessaire
-
-        // Créer un ArrayAdapter pour la classe Spot
-        arrayAdapter = new ArrayAdapter<Spot>(this, android.R.layout.simple_list_item_1, spots) {
-
-           @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                // Utiliser la vue recyclée si elle est disponible
-                if (convertView == null) {
-                    convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
-                }
-
-                // Récupérer l'objet Spot à la position actuelle
-                Spot currentSpot = getItem(position);
-
-                // Récupérer le TextView du layout
-                TextView textView = (TextView) convertView.findViewById(android.R.id.text1);
-
-                // Mettre à jour le TextView avec le champ que vous voulez afficher, par exemple le pays
-                textView.setText(currentSpot.country); // Affiche le pays
-
-                return convertView;
+    private class GetAddress extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Toast.makeText(MainActivity2.this, "Json Spot is downloading", Toast.LENGTH_LONG).show();
+        }
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            String jsonStr = null;
+            try {
+                // Lire le fichier JSON depuis les assets
+                InputStream is = getAssets().open("spot.json");
+                int size = is.available();
+                byte[] buffer = new byte[size];
+                is.read(buffer);
+                is.close();
+                jsonStr = new String(buffer, "UTF-8");
+            } catch (IOException ex) {
+                Log.e(TAG, "Error reading JSON file", ex);
+                return null;
             }
+                //try {
+                // get JSONObject from JSON file
+                //JSONObject obj = new JSONObject("{\"employee\":{\"name\":\"Abhishek Saini\",\"salary\":65000}}");
+                // fetch JSONObject named Records
+                // JSONObject records = obj.getJSONObject("surf break");
 
-        };
+                //surf_break = records.getString("surf break");
 
-        // Associer l'adaptateur à la ListView
-        listView.setAdapter(arrayAdapter);
+                // set employee name and salary in TextView's
+                //records.setText("Surf break: "+ surf_break);
 
-        // Ajouter un OnItemClickListener pour gérer les clics sur les éléments de la liste
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //System.out.println(obj);
 
-                // Obtenir l'objet Spot correspondant à la position cliquée
-                Spot clickedSpot = (Spot) parent.getItemAtPosition(position);
-
-                // Démarrer une nouvelle activité avec les informations du spot
-                Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
-                intent.putExtra("beach", clickedSpot.beach);
-                intent.putExtra("country", clickedSpot.country);
-                intent.putExtra("difficulty level", clickedSpot.difficulty_level);
-                startActivity(intent);
+                // } catch (JSONException e) {
+                //  e.printStackTrace();
             }
-        });
-    }
-    }
-
-    class Spot {
-        String beach;
-        String country;
-        int difficulty_level;
-
-        public Spot(String beach, String country, int difficulty_level) {
-            this.beach = beach;
-            this.country = country;
-            this.difficulty_level = difficulty_level;
         }
-
-        public String getBeach() {
-            return beach;
-        }
-
-        public String getCountry() {
-            return country;
-        }
-
-        public int getDifficulty_level() {
-            return difficulty_level;
-        }
-
-    }
