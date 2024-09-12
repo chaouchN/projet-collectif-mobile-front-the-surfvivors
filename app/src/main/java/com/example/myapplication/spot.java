@@ -51,6 +51,17 @@ public class spot {
         public void setPhotos(String photos) {
             this.photos = photos;
         }
+
+    @Override
+    public String toString() {
+        return "Spot{" +
+                "id=" + id +
+                ", beach='" + beach + '\'' +
+                ", difficulty_level=" + difficulty_level +
+                ", country='" + country + '\'' +
+                ", photos='" + photos + '\'' +
+                '}';
+    }
     }
 
 

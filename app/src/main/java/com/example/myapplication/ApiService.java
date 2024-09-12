@@ -1,10 +1,10 @@
 package com.example.myapplication;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
 
 public interface ApiService {
-    @GET(value = "http://localhost:8080/api/v1/spots/")
-
-    Call<spot> getListSpots(@Query("country") String valeur);
+    @GET(value = "spots/") //chemin du endpoint de l'API surfvivors
+    Call<List<spot>> getListSpots();
 };

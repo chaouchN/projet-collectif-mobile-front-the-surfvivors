@@ -1,64 +1,61 @@
 package com.example.myapplication;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONException;
-
-import android.content.Context;
 import android.os.Bundle;
 import android.widget.ListView;
-import android.content.res.AssetManager;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import android.widget.Toast;
 import android.util.Log;
-import android.os.AsyncTask;
 
+import java.util.List;
 
 
 public class MainActivity2 extends AppCompatActivity {
+
+    private ListView listview;
+    private SpotAdapter spotAdapter; // L'adapter pour la ListView
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        listview = findViewById(R.id.list_view_id);
+
         // Créez une instance de votre service API
-        ApiService apiService = RetrofitClient.getClient("http://localhost:8080/api/v1/spots/").create(ApiService.class);
+        ApiService apiService = RetrofitClient.getClient("http://192.168.8.1:8080/api/v1/").create(ApiService.class);
+        System.out.println(apiService);
 
-        // Appelez une méthode de l'API
-        Call<spot> call = apiService.getListSpots("valeur");
+        // Faites l'appel au webservice (API)
+        Call<List<spot>> call = apiService.getListSpots();
 
-
-        call.enqueue(new Callback<spot>() {
+        // Retourne le résultat
+        call.enqueue(new Callback<List<spot>>() {
             @Override
-            public void onResponse(Call<spot> call, Response<spot> response) {
+            public void onResponse(Call<List<spot>> call, Response<List<spot>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    // Traitez la réponse
-                    spot spotData = response.body();
-                    Log.d("API_RESPONSE", spotData.toString()); // Utiliser le log pour le débogage Android
-                    System.out.println(spotData); // Utiliser System.out.println pour une vérification rapide
+                    List<spot> spots = response.body();
+
+
+                    // Créez l'adapter et associez-le à la ListView
+                    spotAdapter = new SpotAdapter(MainActivity2.this, spots);
+                    listview.setAdapter(spotAdapter);
                 } else {
-                    Log.e("API_ERROR", "Erreur : " + response.code());
+                    Log.e("API_ERROR", "Erreur : " + response.code() + " - " + response.message());
                 }
             }
 
             @Override
-            public void onFailure(Call<spot> call, Throwable t) {
+            public void onFailure(Call<List<spot>> call, Throwable t) {
                 Log.e("API_FAILURE", "Erreur : " + t.getMessage());
+                t.printStackTrace(); // Affiche la trace d'erreur complète pour plus de détails
             }
         });
     }
-
 }
+
+
 
 
 
