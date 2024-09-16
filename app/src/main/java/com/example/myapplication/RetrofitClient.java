@@ -6,10 +6,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private static Retrofit retrofit = null;
 
-    public static synchronized Retrofit getClient(String baseUrl) {
+    public static synchronized Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.8.1:8080/api/v1/")
+                    .baseUrl("http://10.0.2.2:8080")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

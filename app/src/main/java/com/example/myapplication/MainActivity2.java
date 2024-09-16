@@ -24,7 +24,8 @@ public class MainActivity2 extends AppCompatActivity {
         listview = findViewById(R.id.list_view_id);
 
         // Créez une instance de votre service API
-        ApiService apiService = RetrofitClient.getClient("http://192.168.8.1:8080/api/v1/").create(ApiService.class);
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        System.out.println("LOG Api Service:");
         System.out.println(apiService);
 
         // Faites l'appel au webservice (API)
