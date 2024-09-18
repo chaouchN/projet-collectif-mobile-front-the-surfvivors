@@ -5,6 +5,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface ApiService {
-    @GET(value = "/api/V1/spots/") //chemin du endpoint de l'API surfvivors
-    Call<List<spot>> getListSpots();
+    @GET(value = "api/v1/spots")  //endpoint to reach the rest api
+    Call<List<SpotData.Record>> getListSpots();
 };
